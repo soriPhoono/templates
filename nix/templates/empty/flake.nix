@@ -72,15 +72,5 @@
         treefmt = import ./treefmt.nix {inherit lib pkgs;};
         pre-commit = import ./pre-commit.nix {inherit lib pkgs;};
       };
-
-      flake = {
-        # TODO: Replace this with internal discover logic for scalability
-        templates = {
-          empty = {
-            path = ./nix/templates/empty;
-            description = "An empty NixOS configuration.";
-          };
-        };
-      };
     };
 }
