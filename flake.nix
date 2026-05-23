@@ -6,10 +6,6 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     agenix-shell = {
       url = "github:aciceri/agenix-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -75,12 +71,12 @@
 
       flake = {
         # TODO: Replace this with internal discover logic for scalability
-        templates = {
-          empty = {
-            path = ./nix/templates/empty;
-            description = "An empty NixOS configuration.";
-          };
-        };
+        templates =
+          lib.mapAttrs
+          (_name: value: {
+            path = value.value;
+            description = lib.trim (builtins.readFile "${value.value}/template.txt");
+          }) (lib.homelab.core.discover ./nix/templates);
       };
     };
 }

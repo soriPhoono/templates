@@ -6,11 +6,11 @@
 with pkgs;
   mkShell {
     packages = [
-      nixd
-      alejandra
+      gh
 
-      # age
-      # agenix-cli
+      nixd
+      nil
+      alejandra
     ];
 
     shellHook = ''
