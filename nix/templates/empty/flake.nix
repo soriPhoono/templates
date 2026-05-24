@@ -18,6 +18,14 @@
       url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mcp-servers-nix = {
+      url = "github:natsukium/mcp-servers-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    github-actions-nix = {
+      url = "github:synapdeck/github-actions-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -35,6 +43,8 @@
         agenix-shell.flakeModules.default
         treefmt-nix.flakeModule
         git-hooks-nix.flakeModule
+        mcp-servers-nix.flakeModule
+        github-actions-nix.flakeModule
       ];
 
       inherit systems;
@@ -57,16 +67,21 @@
           config.allowUnfree = true;
         };
 
-        devShells.default = import ./shell.nix {
-          inherit lib pkgs;
-          config = {
-            inherit (config) pre-commit agenix-shell;
-          };
-        };
-
         # --- Configuration Builders --- #
         treefmt = import ./treefmt.nix {inherit lib pkgs;};
         pre-commit = import ./pre-commit.nix {inherit lib pkgs;};
+        mcp-servers = import ./mcp.nix {inherit lib pkgs;};
+        githubActions = import ./actions.nix {inherit lib pkgs;};
+
+        # --- Devshell Configuration --- #
+        devShells.default =
+          (import ./shell.nix {
+            inherit lib pkgs;
+            config = {
+              inherit (config) pre-commit agenix-shell;
+            };
+          })
+          // config.mcp-servers.devShell;
       };
     };
 }

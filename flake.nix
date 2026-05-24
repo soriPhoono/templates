@@ -39,13 +39,6 @@
 
       inherit systems;
 
-      agenix-shell = {
-        identityPaths = [
-          "$HOME/.ssh/id_ed25519"
-        ];
-        secrets = {};
-      };
-
       perSystem = {
         pkgs,
         config,
@@ -71,12 +64,10 @@
 
       flake = {
         # TODO: Replace this with internal discover logic for scalability
-        templates =
-          lib.mapAttrs
-          (_name: value: {
-            path = value.value;
-            description = lib.trim (builtins.readFile "${value.value}/template.txt");
-          }) (lib.homelab.core.discover ./nix/templates);
+        templates = lib.mapAttrs (_name: value: {
+          path = value.value;
+          description = lib.trim (builtins.readFile "${value.value}/template.txt");
+        }) (lib.homelab.core.discover ./nix/templates);
       };
     };
 }
