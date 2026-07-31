@@ -57,8 +57,9 @@
           };
         };
 
+        # --- Packages configuration --- #
         packages = {
-          default = import ./src {inherit lib pkgs;};
+          default = import ./. {inherit lib pkgs;};
         };
       };
     };
