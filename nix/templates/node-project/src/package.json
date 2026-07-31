@@ -1,0 +1,15 @@
+{
+  "name": "starter",
+  "version": "0.1.0",
+  "description": "A simple starting project template",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install"
+  },
+  "bin": {
+    "starter": "index.js"
+  }
+}

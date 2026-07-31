@@ -1,5 +1,5 @@
 {
-  description = "Empty flake template";
+  description = "Node.js project template";
 
   inputs = {
     systems.url = "github:nix-systems/default";
@@ -55,6 +55,10 @@
           config = {
             inherit (config) pre-commit;
           };
+        };
+
+        packages = {
+          default = import ./src {inherit lib pkgs;};
         };
       };
     };
