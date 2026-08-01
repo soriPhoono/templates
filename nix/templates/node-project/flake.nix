@@ -56,11 +56,6 @@
             inherit (config) pre-commit;
           };
         };
-
-        # --- Packages configuration --- #
-        packages = {
-          default = import ./. {inherit lib pkgs;};
-        };
       };
     };
 }
