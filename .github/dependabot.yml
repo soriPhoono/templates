@@ -1,0 +1,14 @@
+version: 2
+updates:
+  # Security updates only (limit 0 disables version-update PRs).
+  - package-ecosystem: npm
+    directory: /nix/templates/node-electron
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+    ignore:
+      # The runtime is the nixpkgs Electron (pkgs.electron_43 in flake.nix);
+      # the npm version must stay in lockstep with it, and any lockfile bump
+      # also invalidates the pinned pnpmDeps hash. Electron security fixes
+      # arrive through the nixpkgs flake.lock update instead.
+      - dependency-name: electron
