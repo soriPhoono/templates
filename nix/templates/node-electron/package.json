@@ -1,0 +1,26 @@
+{
+  "name": "electron-app",
+  "version": "0.1.0",
+  "description": "Electron desktop application template",
+  "private": true,
+  "main": "./out/main/index.js",
+  "desktopName": "electron-app.desktop",
+  "packageManager": "pnpm@11.22.0",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "electron": "43.4.1",
+    "electron-vite": "^5.0.0",
+    "typescript": "^7.0.2",
+    "vite": "^7.3.6",
+    "vitest": "^5.0.3"
+  }
+}

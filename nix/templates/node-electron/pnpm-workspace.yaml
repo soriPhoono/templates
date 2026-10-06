@@ -1,0 +1,6 @@
+# esbuild ships its binary as an optional dependency; its install script only
+# re-verifies it. electron's install script would download a prebuilt binary,
+# which Nix replaces with the nixpkgs Electron.
+allowBuilds:
+  electron: false
+  esbuild: false

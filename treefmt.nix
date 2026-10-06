@@ -10,4 +10,7 @@ _: {
 
     mdformat.enable = true;
   };
+
+  # Generated lockfiles inside templates must stay byte-for-byte as emitted.
+  settings.global.excludes = ["**/pnpm-lock.yaml"];
 }
