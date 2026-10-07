@@ -12,3 +12,6 @@ updates:
       # also invalidates the pinned pnpmDeps hash. Electron security fixes
       # arrive through the nixpkgs flake.lock update instead.
       - dependency-name: electron
+      # Pinned exactly: the release workflow packages installers with it, and
+      # any lockfile bump also invalidates the pnpmDeps hash.
+      - dependency-name: electron-builder
