@@ -15,3 +15,9 @@ updates:
       # Pinned exactly: the release workflow packages installers with it, and
       # any lockfile bump also invalidates the pnpmDeps hash.
       - dependency-name: electron-builder
+  # Security updates only; a lockfile bump also invalidates the pnpmDeps hash.
+  - package-ecosystem: npm
+    directory: /nix/templates/node-express
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
