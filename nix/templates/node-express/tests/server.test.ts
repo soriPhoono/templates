@@ -1,8 +1,20 @@
 import http from "node:http";
+import express from "express";
 import { describe, expect, it } from "vitest";
 import { startServer } from "../src/server.ts";
 
 const local = { port: 0, host: "127.0.0.1" };
+
+function get(port: number, path: string, agent: http.Agent): Promise<number> {
+  return new Promise((resolve, reject) => {
+    http
+      .get({ host: "127.0.0.1", port, path, agent }, (res) => {
+        res.resume();
+        res.on("end", () => resolve(res.statusCode ?? 0));
+      })
+      .on("error", reject);
+  });
+}
 
 describe("startServer", () => {
   it("serves requests on the bound port", async () => {
@@ -44,5 +56,34 @@ describe("startServer", () => {
     await server.close();
     agent.destroy();
     expect(Date.now() - started).toBeLessThan(1000);
+  });
+
+  it("closes promptly while a keep-alive client keeps sending requests", async () => {
+    const app = express();
+    app.get("/slow", (_req, res) => {
+      setTimeout(() => res.json({ ok: true }), 300);
+    });
+    const server = await startServer(local, app);
+    const agent = new http.Agent({ keepAlive: true, maxSockets: 1 });
+    const statuses: number[] = [];
+    let stop = false;
+    const loop = (async () => {
+      while (!stop) {
+        try {
+          statuses.push(await get(server.port, "/slow", agent));
+        } catch {
+          break;
+        }
+      }
+    })();
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    const started = Date.now();
+    await server.close();
+    const elapsed = Date.now() - started;
+    stop = true;
+    await loop;
+    agent.destroy();
+    expect(statuses[0]).toBe(200);
+    expect(elapsed).toBeLessThan(2000);
   });
 });
