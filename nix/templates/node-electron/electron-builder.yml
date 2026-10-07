@@ -1,0 +1,19 @@
+# Used by .github/workflows/release.yml only. The Nix build packages the app
+# against the nixpkgs Electron and does not read this file.
+appId: com.example.electron-app
+productName: Electron App
+directories:
+  output: dist
+  # Release workflow renders resources/icon.svg to build/icon.png.
+  buildResources: build
+files:
+  - out/**
+  - package.json
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Utility
+  maintainer: Electron App <maintainer@example.com>
+  executableName: electron-app
+artifactName: ${name}-${version}-${arch}.${ext}

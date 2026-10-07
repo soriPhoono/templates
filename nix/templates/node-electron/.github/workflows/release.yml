@@ -1,0 +1,76 @@
+name: Release installers
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+env:
+  # Pinned: electron-builder is not in package.json, so adding it would change
+  # pnpm-lock.yaml and invalidate the pnpmDeps hash in nix/package.nix.
+  ELECTRON_BUILDER_VERSION: 26.15.3
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6 # version comes from packageManager
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      # Biome is not an npm dependency (see README), so install it separately.
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+        with:
+          version: 2.5.9
+      - name: Check
+        run: |
+          biome ci .
+          pnpm run typecheck
+          pnpm run test
+      - name: Build
+        run: pnpm run build
+      - name: Render app icon
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends librsvg2-bin
+          mkdir -p build
+          rsvg-convert -w 512 -h 512 resources/icon.svg -o build/icon.png
+      - name: Package installers
+        run: >-
+          pnpm dlx electron-builder@${{ env.ELECTRON_BUILDER_VERSION }} --linux AppImage deb --publish never
+      - name: Upload installers
+        uses: actions/upload-artifact@v7
+        with:
+          name: installers
+          path: |
+            dist/*.AppImage
+            dist/*.deb
+          if-no-files-found: error
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download installers
+        uses: actions/download-artifact@v8
+        with:
+          name: installers
+          path: dist
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: gh release create "$GITHUB_REF_NAME" dist/* --generate-notes

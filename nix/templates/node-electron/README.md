@@ -60,6 +60,24 @@ The window runs with `contextIsolation`, `sandbox` and no `nodeIntegration`,
 under a strict CSP. Add new IPC channels to `src/shared/api.ts`, handle them in
 `src/main/index.ts` and expose them in `src/preload/index.ts`.
 
+## Installers (AppImage and deb)
+
+`.github/workflows/release.yml` builds Linux installers with electron-builder,
+outside the Nix build. It runs on `v*` tags and manually
+(`workflow_dispatch`); a tag also publishes a GitHub release with the files.
+
+```sh
+git tag v0.1.0 && git push origin v0.1.0
+```
+
+- Settings live in `electron-builder.yml`. Replace `appId`, `productName` and
+  `maintainer` after renaming the placeholder.
+- electron-builder runs through `pnpm dlx` at the version pinned in the
+  workflow, so it is not in `package.json` and does not change the pnpm hash.
+- The installers bundle the Electron binary electron-builder downloads for the
+  version in `package.json`, not the nixpkgs one.
+- The workflow renders `resources/icon.svg` to `build/icon.png` for the icon.
+
 ## Updating dependencies
 
 `nix/package.nix` pins the pnpm dependencies with a hash. After any change to
