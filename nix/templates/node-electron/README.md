@@ -72,8 +72,8 @@ git tag v0.1.0 && git push origin v0.1.0
 
 - Settings live in `electron-builder.yml`. Replace `appId`, `productName` and
   `maintainer` after renaming the placeholder.
-- electron-builder runs through `pnpm dlx` at the version pinned in the
-  workflow, so it is not in `package.json` and does not change the pnpm hash.
+- electron-builder is a pinned devDependency, so upgrading it changes
+  `pnpm-lock.yaml` and needs a pnpm hash refresh (see below).
 - The installers bundle the Electron binary electron-builder downloads for the
   version in `package.json`, not the nixpkgs one.
 - The workflow renders `resources/icon.svg` to `build/icon.png` for the icon.

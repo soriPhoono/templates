@@ -3,4 +3,6 @@
 # which Nix replaces with the nixpkgs Electron.
 allowBuilds:
   electron: false
+  # Windows installer helper pulled in by electron-builder; unused for Linux.
+  electron-winstaller: false
   esbuild: false

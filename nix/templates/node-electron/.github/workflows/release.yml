@@ -9,10 +9,6 @@ permissions:
 concurrency:
   group: release-${{ github.ref }}
   cancel-in-progress: false
-env:
-  # Pinned: electron-builder is not in package.json, so adding it would change
-  # pnpm-lock.yaml and invalidate the pnpmDeps hash in nix/package.nix.
-  ELECTRON_BUILDER_VERSION: 26.15.3
 jobs:
   build:
     runs-on: ubuntu-24.04
@@ -48,7 +44,7 @@ jobs:
           rsvg-convert -w 512 -h 512 resources/icon.svg -o build/icon.png
       - name: Package installers
         run: >-
-          pnpm dlx electron-builder@${{ env.ELECTRON_BUILDER_VERSION }} --linux AppImage deb --publish never
+          pnpm exec electron-builder --linux AppImage deb --publish never
       - name: Upload installers
         uses: actions/upload-artifact@v7
         with:
