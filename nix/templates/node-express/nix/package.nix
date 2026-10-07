@@ -58,7 +58,10 @@ in
       mkdir -p $appDir
       cp -r package.json dist node_modules $appDir/
 
+      # Same default as the Docker image: Express leaks stack traces to clients
+      # in its error responses unless NODE_ENV is production.
       makeWrapper ${lib.getExe nodejs} $out/bin/${finalAttrs.pname} \
+        --set-default NODE_ENV production \
         --add-flags $appDir/dist/index.js
 
       runHook postInstall
