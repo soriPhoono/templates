@@ -1,5 +1,5 @@
 {
-  outputs.templates = rec {
+  flake.templates = rec {
     default = empty;
     empty = {
       path = ./empty;
