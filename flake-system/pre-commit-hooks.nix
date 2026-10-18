@@ -32,9 +32,7 @@
             check-executables-have-shebangs.enable = true;
             check-added-large-files.enable = true;
 
-            gitleaks = {
-              enable = true;
-            };
+            gitleaks.enable = true;
           };
         };
     };

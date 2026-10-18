@@ -14,5 +14,6 @@
     inputs.flake-file.flakeModules.auto-follow
 
     ./inputs.nix
+    ../templates
   ];
 }
