@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   modules: ["@nuxt/eslint", "@nuxt/ui"],
 
+  // Tauri serves a static bundle, so there is no Nitro server at runtime
+  ssr: false,
+
   devtools: {
     enabled: true,
   },
