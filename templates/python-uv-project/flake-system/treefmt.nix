@@ -22,6 +22,7 @@
         settings = {
           global.excludes = [
             "*.age" # Age encrypted files
+            "**/pnpm-lock.yaml" # Generated lockfile, rewritten by yamlfmt
           ];
           shellcheck.includes = [
             "*.sh"
@@ -35,9 +36,8 @@
           statix.enable = true; # Lints and suggestions for the nix programming language
           nixfmt.enable = true; # An opinionated formatter for Nix
 
-          prettier.enable = true; # Prettier is an opinionated code formatter
+          prettier.enable = true; # Prettier is an opinionated code formatter (JS, TS, JSON, CSS, ...)
           yamlfmt.enable = true; # An extensible command line tool or library to format yaml files.
-          jsonfmt.enable = true; # Formatter for JSON files
           # mdformat.enable = true; # CommonMark compliant Markdown formatter
 
           ruff-check.enable = true; # Python linter (rules from [tool.ruff.lint] in pyproject.toml)
