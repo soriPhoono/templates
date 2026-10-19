@@ -32,9 +32,8 @@ The dev shell installs the pre-commit hooks and provides `nil`, `statix`,
 | `rust-tauri-app`    | Available             | Tauri 2 shell with a Nuxt UI frontend, pnpm                  |
 
 > [!NOTE]
-> Only `empty` and `rust-project` are registered in
-> `templates/default.nix`. The other two cannot be used with
-> `nix flake init -t` until they are registered.
+> `python-project` is not registered in `templates/default.nix`, so it
+> cannot be used with `nix flake init -t` until it is registered.
 
 Select a template by name:
 
