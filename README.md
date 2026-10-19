@@ -28,7 +28,7 @@ The dev shell installs the pre-commit hooks and provides `nil`, `statix`,
 | ------------------- | --------------------- | ------------------------------------------------------------ |
 | `empty` (`default`) | Available             | Bare flake and dev shell                                     |
 | `rust-project`      | Available             | Cargo workspace, crane, rust-overlay, clippy and test checks |
-| `python-uv-project` | In repo, not exported | `src/` layout, uv, ruff, pyright, pytest                     |
+| `python-project`    | In repo, not exported | `src/` layout, uv, ruff, pyright, pytest                     |
 | `rust-tauri-app`    | Available             | Tauri 2 shell with a Nuxt UI frontend, pnpm                  |
 
 > [!NOTE]

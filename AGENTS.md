@@ -13,7 +13,7 @@ nix flake init -t github:soriPhoono/templates#<name>
 - **Templates** live in `templates/<name>/`:
   - `empty`: bare flake + devShell. Registered as `default`.
   - `rust-project`: Cargo workspace (`templates-core` lib, `templates-cli` bin), toolchain pinned in `rust-toolchain.toml` via rust-overlay, crane build with clippy and test checks. Registered.
-  - `python-uv-project`: `src/` layout, uv, ruff, pyright, pytest (`pyproject.toml`, `uv.lock`).
+  - `python-project`: `src/` layout, uv, ruff, pyright, pytest (`pyproject.toml`, `uv.lock`).
   - `rust-tauri-app`: Tauri 2 shell (`src-tauri/`) with a Nuxt UI frontend (`app/`), pnpm. Registered.
 
 ## Repository Layout
@@ -46,7 +46,7 @@ Each template directory is a full standalone project: its own `flake.nix`, `flak
   ```
 
 - Rust template: `nix flake check` runs clippy (`--deny warnings`) and `cargo test` through crane; `nix run` inside `templates/rust-project` runs the CLI. `Cargo.lock` is part of the template.
-- Python template tests: inside `templates/python-uv-project`, `uv run pytest`, `uv run ruff check`, `uv run pyright`.
+- Python template tests: inside `templates/python-project`, `uv run pytest`, `uv run ruff check`, `uv run pyright`.
 
 ## Code Style
 
@@ -74,6 +74,6 @@ Each template directory is a full standalone project: its own `flake.nix`, `flak
 - `flake.lock` files are excluded from pre-commit formatting. Do not hand-edit them.
 - Lockfiles of a template (`uv.lock`, `flake.lock`) are part of the template; refresh them with the tool, not by hand.
 - `.github/workflows/update-flake-lock.yml` opens weekly PRs against the root; template lockfiles are not updated by it.
-- `templates/default.nix` currently registers `empty`, `rust-project` and `rust-tauri-app`. `python-uv-project` exists on disk but is not yet exported.
+- `templates/default.nix` currently registers `empty`, `rust-project` and `rust-tauri-app`. `python-project` exists on disk but is not yet exported.
 - The root `rename-project` devShell script (`rename-project <dir> <name>`) seds `templates` to the new name across a directory.
 - Notion project page "Nix templates repo" describes an older layout (`nix/lib.nix`, `template.txt`, node templates). The current flake-file layout above is authoritative.
