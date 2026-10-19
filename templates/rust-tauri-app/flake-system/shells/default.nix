@@ -55,6 +55,16 @@
         overlays = [ inputs.rust-overlay.overlays.default ];
       };
 
+      packages.default = pkgs.callPackage ./package.nix {
+        inherit tauriNativeBuildInputs tauriBuildInputs;
+        inherit (pkgs) pnpm;
+      };
+
+      apps.default = {
+        type = "app";
+        program = lib.getExe config.packages.default;
+      };
+
       devShells = {
         default = config.devShells.dev;
 
