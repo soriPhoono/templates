@@ -1,21 +1,15 @@
 # --- flake-parts/shells/dev.nix
 {
   lib,
-  mkShell,
-  nil,
-  statix,
-  deadnix,
-  nix-output-monitor,
-  nixfmt-rfc-style,
-  markdownlint-cli,
-  writeShellScriptBin,
+  pkgs,
+  toolchain,
   treefmt-wrapper ? null,
   dev-process ? null,
   pre-commit ? null,
 }:
 let
   scripts = {
-    rename-project = writeShellScriptBin "rename-project" ''
+    rename-project = pkgs.writeShellScriptBin "rename-project" ''
       find $1 \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s/templates/$2/g"
     '';
   };
@@ -25,9 +19,9 @@ let
     # MY_OTHER_ENV_VAR = "Goodbye, World!";
   };
 in
-mkShell {
-
+pkgs.mkShell {
   packages =
+    with pkgs;
     (lib.attrValues scripts)
     ++ (lib.optional (treefmt-wrapper != null) treefmt-wrapper)
     ++ (lib.optional (dev-process != null) dev-process)
@@ -51,7 +45,14 @@ mkShell {
       # nodePackages.prettier # Prettier is an opinionated code formatter
       # typos # Source code spell checker
 
-      # -- (YOUR) EXTRA PKGS --
+      # -- RUST UTILS --
+      toolchain # Pinned by rust-toolchain.toml
+      cargo-watch # Re-run cargo commands on file change
+
+      # -- NODEJS UTILS --
+      nodejs
+      pnpm
+      biome
     ];
 
   shellHook = ''

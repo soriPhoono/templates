@@ -40,6 +40,10 @@
           jsonfmt.enable = true; # Formatter for JSON files
           # mdformat.enable = true; # CommonMark compliant Markdown formatter
 
+          ruff-check.enable = true; # Python linter (rules from [tool.ruff.lint] in pyproject.toml)
+          ruff-format.enable = true; # Python formatter
+          taplo.enable = true; # TOML formatter (pyproject.toml)
+
           shellcheck.enable = true; # Shell script analysis tool
           shfmt.enable = true; # Shell parser and formatter
 

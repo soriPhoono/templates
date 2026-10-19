@@ -5,8 +5,6 @@
     inputs.flake-file.flakeModules.auto-follow
 
     ./inputs.nix
-
-    # Add your nix expression here for import
   ];
 
   flake-file.outputs = "flake-parts";

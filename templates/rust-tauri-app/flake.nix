@@ -15,6 +15,9 @@
   };
 
   inputs = {
+    crane = {
+      url = "github:ipetkov/crane";
+    };
     flake-file = {
       url = "github:denful/flake-file";
     };
@@ -26,6 +29,10 @@
     };
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     systems = {

@@ -40,6 +40,11 @@
           jsonfmt.enable = true; # Formatter for JSON files
           # mdformat.enable = true; # CommonMark compliant Markdown formatter
 
+          rustfmt = {
+            enable = true; # Formatter for Rust code
+            edition = "2024";
+          };
+
           shellcheck.enable = true; # Shell script analysis tool
           shfmt.enable = true; # Shell parser and formatter
 
