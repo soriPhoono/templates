@@ -1,4 +1,31 @@
+# Nix outputs
 .direnv/
-.pre-commit-config.yaml
-target/
 result
+
+# Rust build outputs
+target/
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Node dependencies
+node_modules
+
+# Logs
+logs
+*.log
+
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
+.env
+.env.*
+!.env.example
