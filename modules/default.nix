@@ -1,13 +1,4 @@
-{ inputs, lib, ... }: {
-  flake-file = {
-    outputs = "flake-parts";
-    inputs = {
-      flake-file.url = lib.mkDefault "github:denful/flake-file";
-    };
-  };
-
-  systems = lib.systems.flakeExposed;
-
+{ inputs, ... }: {
   imports = [
     (inputs.flake-file.lib.flakeModules.flake-parts-builder ../flake-system)
     inputs.flake-file.flakeModules.default
