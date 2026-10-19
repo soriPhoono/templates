@@ -1,0 +1,8 @@
+[package]
+name = "templates-cli"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[dependencies]
+templates-core.workspace = true
