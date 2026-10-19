@@ -7,4 +7,6 @@
     ./inputs.nix
     ../templates
   ];
+
+  flake-file.outputs = "flake-parts";
 }
