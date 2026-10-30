@@ -24,16 +24,12 @@ The dev shell installs the pre-commit hooks and provides `nil`, `statix`,
 
 ## Templates
 
-| Template            | Status                | Description                                                  |
-| ------------------- | --------------------- | ------------------------------------------------------------ |
-| `empty` (`default`) | Available             | Bare flake and dev shell                                     |
-| `rust-project`      | Available             | Cargo workspace, crane, rust-overlay, clippy and test checks |
-| `python-project`    | In repo, not exported | `src/` layout, uv, ruff, pyright, pytest                     |
-| `rust-tauri-app`    | Available             | Tauri 2 shell with a Nuxt UI frontend, pnpm                  |
-
-> [!NOTE]
-> `python-project` is not registered in `templates/default.nix`, so it
-> cannot be used with `nix flake init -t` until it is registered.
+| Template            | Status    | Description                                                  |
+| ------------------- | --------- | ------------------------------------------------------------ |
+| `empty` (`default`) | Available | Bare flake and dev shell                                     |
+| `rust-project`      | Available | Cargo workspace, crane, rust-overlay, clippy and test checks |
+| `python-project`    | Available | `src/` layout, uv, ruff, pyright, pytest                     |
+| `rust-tauri-app`    | Available | Tauri 2 shell with a Nuxt UI frontend, pnpm                  |
 
 Select a template by name:
 

@@ -74,6 +74,6 @@ Each template directory is a full standalone project: its own `flake.nix`, `flak
 - `flake.lock` files are excluded from pre-commit formatting. Do not hand-edit them.
 - Lockfiles of a template (`uv.lock`, `flake.lock`) are part of the template; refresh them with the tool, not by hand.
 - `.github/workflows/update-flake-lock.yml` opens weekly PRs against the root; template lockfiles are not updated by it.
-- `templates/default.nix` currently registers `empty`, `rust-project` and `rust-tauri-app`. `python-project` exists on disk but is not yet exported.
+- `templates/default.nix` registers `empty`, `rust-project`, `python-project` and `rust-tauri-app`.
 - The root `rename-project` devShell script (`rename-project <dir> <name>`) seds `templates` to the new name across a directory.
 - Notion project page "Nix templates repo" describes an older layout (`nix/lib.nix`, `template.txt`, node templates). The current flake-file layout above is authoritative.
