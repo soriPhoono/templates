@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "godot: editor",
+      "detail": "Opens the project in the Godot editor, which serves the GDScript LSP on 6005 and the debug adapter on 6006",
+      "type": "shell",
+      "command": "godot --editor --path .",
+      "problemMatcher": []
+    },
+    {
+      "label": "godot: run",
+      "type": "shell",
+      "command": "godot --path .",
+      "problemMatcher": []
+    },
+    {
+      "label": "gdlint",
+      "type": "shell",
+      "command": "gdlint scripts",
+      "problemMatcher": []
+    },
+    {
+      "label": "gdformat",
+      "type": "shell",
+      "command": "gdformat scripts",
+      "problemMatcher": []
+    }
+  ]
+}
