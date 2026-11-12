@@ -30,6 +30,8 @@ The dev shell installs the pre-commit hooks and provides `nil`, `statix`,
 | `rust-project`      | Available | Cargo workspace, crane, rust-overlay, clippy and test checks |
 | `python-project`    | Available | `src/` layout, uv, ruff, pyright, pytest                     |
 | `rust-tauri-app`    | Available | Tauri 2 shell with a Nuxt UI frontend, pnpm                  |
+| `godot-project-2d`  | Available | Godot 4 GDScript 2D scene, gdlint and gdformat               |
+| `godot-project-3d`  | Available | Godot 4 GDScript 3D scene, gdlint and gdformat               |
 
 Select a template by name:
 
