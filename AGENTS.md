@@ -15,6 +15,7 @@ nix flake init -t github:soriPhoono/templates#<name>
   - `rust-project`: Cargo workspace (`templates-core` lib, `templates-cli` bin), toolchain pinned in `rust-toolchain.toml` via rust-overlay, crane build with clippy and test checks. Registered.
   - `python-project`: `src/` layout, uv, ruff, pyright, pytest (`pyproject.toml`, `uv.lock`).
   - `rust-tauri-app`: Tauri 2 shell (`src-tauri/`) with a Nuxt UI frontend (`app/`), pnpm. Registered.
+  - `godot-project-2d`: Godot 4 GDScript 2D starter (`project.godot`, `scenes/`, `scripts/`), `gdlint` flake check and `gdformat` via treefmt. Registered.
 
 ## Repository Layout
 
@@ -74,6 +75,6 @@ Each template directory is a full standalone project: its own `flake.nix`, `flak
 - `flake.lock` files are excluded from pre-commit formatting. Do not hand-edit them.
 - Lockfiles of a template (`uv.lock`, `flake.lock`) are part of the template; refresh them with the tool, not by hand.
 - `.github/workflows/update-flake-lock.yml` opens weekly PRs against the root; template lockfiles are not updated by it.
-- `templates/default.nix` registers `empty`, `rust-project`, `python-project` and `rust-tauri-app`.
+- `templates/default.nix` registers `empty`, `rust-project`, `python-project`, `rust-tauri-app` and `godot-project-2d`.
 - The root `rename-project` devShell script (`rename-project <dir> <name>`) seds `templates` to the new name across a directory.
 - Notion project page "Nix templates repo" describes an older layout (`nix/lib.nix`, `template.txt`, node templates). The current flake-file layout above is authoritative.

@@ -17,5 +17,9 @@
       path = ./rust-tauri-app;
       description = "Tauri 2 desktop app template with a Nuxt UI frontend and pnpm";
     };
+    godot-project-2d = {
+      path = ./godot-project-2d;
+      description = "Godot 4 GDScript 2D project template with gdtoolkit lint and format";
+    };
   };
 }
