@@ -3,6 +3,8 @@
   lib,
   pkgs,
   toolchain,
+  tauriNativeBuildInputs,
+  tauriBuildInputs,
   treefmt-wrapper ? null,
   dev-process ? null,
   pre-commit ? null,
@@ -20,23 +22,8 @@ let
   };
 in
 pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [
-    pkg-config
-    wrapGAppsHook3
-  ];
-
-  # Tauri v2 system libraries (https://v2.tauri.app/start/prerequisites/#linux)
-  buildInputs = with pkgs; [
-    dbus
-    glib
-    gtk3
-    libayatana-appindicator
-    librsvg
-    libsoup_3
-    openssl
-    webkitgtk_4_1
-    xdg-utils
-  ];
+  nativeBuildInputs = tauriNativeBuildInputs;
+  buildInputs = tauriBuildInputs;
 
   packages =
     with pkgs;

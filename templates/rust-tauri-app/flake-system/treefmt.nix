@@ -22,7 +22,8 @@
         settings = {
           global.excludes = [
             "*.age" # Age encrypted files
-            "**/pnpm-lock.yaml" # Generated lockfile, rewritten by yamlfmt
+            "pnpm-lock.yaml" # Generated lockfile, rewritten by yamlfmt
+            "**/pnpm-lock.yaml"
           ];
           shellcheck.includes = [
             "*.sh"
