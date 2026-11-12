@@ -57,7 +57,6 @@ pkgs.mkShell {
       # -- NODEJS UTILS --
       nodejs
       pnpm
-      biome
     ];
 
   shellHook = ''
