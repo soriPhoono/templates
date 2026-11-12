@@ -21,5 +21,9 @@
       path = ./godot-project-2d;
       description = "Godot 4 GDScript 2D project template with gdtoolkit lint and format";
     };
+    godot-project-3d = {
+      path = ./godot-project-3d;
+      description = "Godot 4 GDScript 3D project template with gdtoolkit lint and format";
+    };
   };
 }
